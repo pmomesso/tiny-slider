@@ -1921,7 +1921,10 @@ export var tns = function(options) {
       // skip the first slide
       if (i) { slidePositions.push(item.getBoundingClientRect()[attr] - base); }
       // add the end edge
-      if (i === slideCountNew - 1) { slidePositions.push(item.getBoundingClientRect()[attr2] - base); }
+      // CHANGE: from attr2 to attr
+      // POSSIBLE BUG: when computing getIndexMax for an autowidth slider, using the rightmost boundary for the last slide may sometimes
+      // cause getIndexMax to never enter the if statement, leaving indexMax undefined
+      if (i === slideCountNew - 1) { slidePositions.push(item.getBoundingClientRect()[attr] - base); }
     });
   }
 
